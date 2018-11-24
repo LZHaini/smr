@@ -70,8 +70,8 @@ public class LoginController {
         User user=userService.queryUserByName(username);
         Subject subject=SecurityUtils.getSubject();
         jedis.set("user2", JSON.toJSONString(user));
-        String json=jedis.get("user2");
-       /* User uu=JSON.parseObject(json,User.class);*/
+        /* String json=jedis.get("user2");
+       User uu=JSON.parseObject(json,User.class);*/
         JSONObject result= new JSONObject();
         UsernamePasswordToken token=new UsernamePasswordToken(username,password);
         try {
