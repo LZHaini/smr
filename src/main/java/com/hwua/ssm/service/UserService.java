@@ -11,7 +11,7 @@ public interface UserService {
 
     /*public List<User> queryAll();*/
     public int updatePwd(String username, String oldpwd, String newpwd);
-
+//
     public List<Map<String, Object>> queryUser(User user);
 
     public int saveOrUpdateUser(User user);

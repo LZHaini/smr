@@ -7,9 +7,8 @@ import java.util.Map;
 
 public interface RoleService {
     public List<Map<String, Object>> queryRole(Role role);
-//
-    public int saveOrUpdateRole(Role role);
 
+    public int saveOrUpdateRole(Role role);
     public List<Map<String, Object>> queryAuthByRoleId(int roleid);
 
     public int addRoleAndAuth(int roleid, List<Map<String, Object>> params);
