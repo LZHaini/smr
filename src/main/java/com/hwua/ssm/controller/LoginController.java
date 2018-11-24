@@ -1,5 +1,6 @@
 package com.hwua.ssm.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hwua.ssm.entity.User;
 import com.hwua.ssm.service.UserService;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import redis.clients.jedis.Jedis;
 
 
 import javax.servlet.http.HttpSession;
@@ -64,8 +66,12 @@ public class LoginController {
         return result.toJSONString();
     }*/
     public String login(String username,String password,HttpSession session){
+        Jedis jedis= new Jedis("192.168.1.102",6379);
         User user=userService.queryUserByName(username);
         Subject subject=SecurityUtils.getSubject();
+        jedis.set("user2", JSON.toJSONString(user));
+        String json=jedis.get("user2");
+       /* User uu=JSON.parseObject(json,User.class);*/
         JSONObject result= new JSONObject();
         UsernamePasswordToken token=new UsernamePasswordToken(username,password);
         try {
